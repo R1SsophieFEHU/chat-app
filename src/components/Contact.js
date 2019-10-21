@@ -3,22 +3,31 @@ import './contact.css';
 
 
 
-function Contact (props){
-    return (
-    <div className="Contact">
-        <img className ="avatar" src={props.avatar} alt={`avatar of ${props.name}`}/>
-            <div>
-                
-                <p className="name">{props.name}</p>
-              <div className="status">
-                <div className={props.online ? "status-online" : "status-offline"}>
-                </div>
-                <p className="status-text">{props.online ? "Online" : "Offline"}</p>
-             
-                </div>
+class Contact extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isConnected : false}; 
+    }
+      
+    render() {
+        return (
+            <div className="Contact">
+                <img className ="avatar" src={this.props.avatar} alt={`avatar of ${this.props.name}`}/>
+                    <div>                        
+                        <p className="name">{this.props.name}</p>
+                    <div onClick = {event => {
+                        const newState = !this.state.isConnected;
+                        this.setState ({isConnected : newState})}}
+                        className="status">
+                        <div className={this.state.isConnected ? "status-online" : "status-offline"}>
+                        </div>
+                        <p className="status-text">{this.state.isConnected ? "Online" : "Offline"}</p>
+                    
+                        </div>
+                    </div>
             </div>
-    </div>
-    );
+        );
+    }
 }
 
 export default Contact;
